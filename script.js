@@ -23,8 +23,7 @@ async function roastUser(usernameManual = '') {
   await new Promise(resolve => setTimeout(resolve, 1000));
 
   try {
- const response = await fetch(`https://backendapi-production-ins.up.railway.app/api/roast?username=${username}`);
-
+    const response = await fetch(`https://backendapi-production-ins.up.railway.app/api/roast?username=${username}`);
     const data = await response.json();
 
     if (data && data.username && data.avatar && data.roasting) {
@@ -77,10 +76,12 @@ function generateStars(rating) {
   return starsHTML;
 }
 
-
+function showLeaderboard() {
   const history = JSON.parse(localStorage.getItem('roastHistory') || '[]');
   const sorted = history.sort((a, b) => b.rating - a.rating).slice(0, 5);
 
+  const board = document.createElement('div'); // FIX: deklarasi elemen
+  board.classList.add('leaderboard');
   board.innerHTML = `<h3>🔥 Top Roastable</h3>` + sorted.map(u => `
     <div>@${u.username} - ⭐️ ${u.rating}</div>
   `).join('');
@@ -88,8 +89,7 @@ function generateStars(rating) {
   document.getElementById('hasilRoast').appendChild(board);
 }
 
-
 // Toggle Dark/Light Mode
 function toggleTheme() {
   document.body.classList.toggle('dark-mode');
-} 
+}
