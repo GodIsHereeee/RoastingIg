@@ -23,7 +23,8 @@ async function roastUser(usernameManual = '') {
   await new Promise(resolve => setTimeout(resolve, 1000));
 
   try {
-    const response = await fetch(`http://localhost:3000/api/roast?username=${username}`);
+ const response = await fetch(`https://backendapi-production-ins.up.railway.app/api/roast?username=${username}`);
+
     const data = await response.json();
 
     if (data && data.username && data.avatar && data.roasting) {
